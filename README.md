@@ -112,17 +112,12 @@ git clone https://github.com/your-repo-url.git
 - 기업 HR팀 면접관 훈련 시스템
 - 언어 훈련, 스피치 교육 등 다양한 확장 활용 가능
 
-##  협업 문서
-
-- [협업 가이드 문서](CONTRIBUTING.md)
-
-##  기타 정보
-- 본 프로젝트는 클라우드 데브옵스 자바 풀스택 개발자 과정 (KD) 훈련 과정 중 팀 프로젝트로 수행되었습니다.
 
 
-# AI Chat & AI Voice 시각적 흐름도 (상세 설명 포함)
 
-## 🎯 AI Chat Flow
+## 참고 다이어그램
+
+## AI Chat Flow
 
 ```mermaid
 flowchart TD
@@ -141,7 +136,7 @@ flowchart TD
     style G fill:#f3e5f5
 ```
 
-### 📋 AI Chat 흐름 설명
+### AI Chat 흐름 설명
 
 **🔵 파란색 박스 (시작점)**
 - **사용자 접속**: 로그인 후 `/ai/aichat` 페이지 접속
@@ -160,7 +155,7 @@ flowchart TD
 
 ---
 
-## 🎯 AI Voice Flow
+## AI Voice Flow
 
 ```mermaid
 flowchart TD
@@ -178,26 +173,26 @@ flowchart TD
     style E fill:#f3e5f5
 ```
 
-### 📋 AI Voice 흐름 설명
+### AI Voice 흐름 설명
 
-**🔵 파란색 박스 (시작점)**
+**파란색 박스 (시작점)**
 - **음성 면접 시작**: `/ai/voice/chat` 페이지에서 새 면접 세션 생성
 - 미리 정의된 면접 질문 순서에 따라 진행
 
-**🟠 주황색 박스 (API 처리)**
+**주황색 박스 (API 처리)**
 - **Whisper API**: 음성 파일을 텍스트로 변환 (Speech-to-Text)
 - **GPT-4 API**: 변환된 텍스트를 분석하여 상세 피드백 생성
 
-**🟣 보라색 박스 (결과 처리)**
+**보라색 박스 (결과 처리)**
 - **상세 피드백 생성**: 발음, 속도, 내용, 장단점, 개선점 분석
 - 개선된 답변 예시와 다음 단계 제안 제공
 
-**🔄 반복 과정**
+**반복 과정**
 - 다음 질문 제공 후 다시 음성 녹음 단계로 돌아가 순차적 면접 진행
 
 ---
 
-## 🔄 비교 다이어그램
+##  비교 다이어그램
 
 ```mermaid
 graph LR
@@ -237,7 +232,7 @@ graph LR
 
 ---
 
-## 🏗️ 시스템 아키텍처
+## 시스템 아키텍처
 
 ```mermaid
 graph TB
@@ -282,31 +277,31 @@ graph TB
     style J fill:#f3e5f5
 ```
 
-### 📋 시스템 아키텍처 설명
+### 시스템 아키텍처 설명
 
-**🔵 Frontend (사용자 인터페이스)**
+**Frontend (사용자 인터페이스)**
 - Thymeleaf 템플릿 기반 웹 인터페이스
 - JavaScript를 통한 실시간 상호작용
 - WebRTC를 활용한 음성 녹음 기능
 
-**🟡 Backend (비즈니스 로직)**
+**Backend (비즈니스 로직)**
 - **AIController**: AI 채팅 관련 HTTP 요청 처리
 - **AiVoiceController**: AI 음성 면접 관련 요청 처리
 - **AIService**: GPT-4 API 연동 및 채팅 로직
 - **AiVoiceService**: Whisper API 연동 및 음성 분석 로직
 
-**🟠 External APIs (외부 API)**
+**External APIs (외부 API)**
 - **OpenAI GPT-4**: 텍스트 기반 AI 응답 생성
 - **OpenAI Whisper**: 음성 파일을 텍스트로 변환
 
-**🟣 Database (데이터 저장)**
+**Database (데이터 저장)**
 - **AiMessage**: 채팅 메시지 저장 (사용자/AI 대화)
 - **AiVoice**: 음성 면접 결과 저장 (분석 결과, 피드백)
 - **AiSession**: 세션 정보 저장 (대화 세션 관리)
 
 ---
 
-## 📊 데이터 흐름
+## 데이터 흐름
 
 ```mermaid
 sequenceDiagram
@@ -337,7 +332,7 @@ sequenceDiagram
     C->>U: 분석 결과 표시
 ```
 
-### 📋 데이터 흐름 설명
+### 데이터 흐름 설명
 
 **AI Chat 데이터 흐름:**
 1. **사용자 → Controller**: AJAX를 통한 메시지 전송
@@ -361,7 +356,7 @@ sequenceDiagram
 
 ---
 
-## 🎨 사용자 경험 흐름
+## 사용자 경험 흐름
 
 ```mermaid
 journey
@@ -380,7 +375,7 @@ journey
       다음 질문: 4: 사용자
 ```
 
-### 📋 사용자 경험 설명
+### 사용자 경험 설명
 
 **AI Chat 사용자 경험:**
 - **로그인 (5점)**: 간편한 로그인으로 빠른 접근
@@ -403,7 +398,7 @@ journey
 
 ---
 
-## 🔧 기술적 구현 포인트
+## 기술적 구현 포인트
 
 ### AI Chat 구현 특징:
 - **실시간 처리**: AJAX를 통한 비동기 통신
