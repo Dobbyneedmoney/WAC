@@ -119,3 +119,166 @@ git clone https://github.com/your-repo-url.git
 ##  기타 정보
 - 본 프로젝트는 클라우드 데브옵스 자바 풀스택 개발자 과정 (KD) 훈련 과정 중 팀 프로젝트로 수행되었습니다.
 
+
+# AI Chat & AI Voice 시각적 흐름도
+
+## 🎯 AI Chat Flow
+
+```mermaid
+flowchart TD
+    A[사용자 접속] --> B[세션 생성/확인]
+    B --> C[채팅 페이지 로드]
+    C --> D[사용자 메시지 입력]
+    D --> E[GPT-4 API 호출]
+    E --> F[AI 응답 생성]
+    F --> G[대화 저장]
+    G --> H[화면에 표시]
+    H --> D
+    
+    style A fill:#e1f5fe
+    style E fill:#fff3e0
+    style F fill:#fff3e0
+    style G fill:#f3e5f5
+```
+
+## 🎯 AI Voice Flow
+
+```mermaid
+flowchart TD
+    A[음성 면접 시작] --> B[사용자 음성 녹음]
+    B --> C[Whisper API<br/>음성→텍스트]
+    C --> D[GPT-4 API<br/>분석]
+    D --> E[상세 피드백 생성]
+    E --> F[결과 저장]
+    F --> G[다음 질문 제공]
+    G --> B
+    
+    style A fill:#e1f5fe
+    style C fill:#fff3e0
+    style D fill:#fff3e0
+    style E fill:#f3e5f5
+```
+
+## 🔄 비교 다이어그램
+
+```mermaid
+graph LR
+    subgraph "AI Chat"
+        A1[텍스트 입력] --> A2[GPT-4 API]
+        A2 --> A3[즉시 응답]
+    end
+    
+    subgraph "AI Voice"
+        B1[음성 녹음] --> B2[Whisper API]
+        B2 --> B3[텍스트 변환]
+        B3 --> B4[GPT-4 API]
+        B4 --> B5[상세 분석]
+    end
+    
+    style A1 fill:#e1f5fe
+    style A2 fill:#fff3e0
+    style A3 fill:#f3e5f5
+    style B1 fill:#e1f5fe
+    style B2 fill:#fff3e0
+    style B3 fill:#fff3e0
+    style B4 fill:#fff3e0
+    style B5 fill:#f3e5f5
+```
+
+## 🏗️ 시스템 아키텍처
+
+```mermaid
+graph TB
+    subgraph "Frontend"
+        A[사용자 인터페이스]
+    end
+    
+    subgraph "Backend"
+        B[AIController]
+        C[AiVoiceController]
+        D[AIService]
+        E[AiVoiceService]
+    end
+    
+    subgraph "External APIs"
+        F[OpenAI GPT-4]
+        G[OpenAI Whisper]
+    end
+    
+    subgraph "Database"
+        H[AiMessage]
+        I[AiVoice]
+        J[AiSession]
+    end
+    
+    A --> B
+    A --> C
+    B --> D
+    C --> E
+    D --> F
+    E --> G
+    E --> F
+    D --> H
+    E --> I
+    B --> J
+    
+    style A fill:#e1f5fe
+    style F fill:#fff3e0
+    style G fill:#fff3e0
+    style H fill:#f3e5f5
+    style I fill:#f3e5f5
+    style J fill:#f3e5f5
+```
+
+## 📊 데이터 흐름
+
+```mermaid
+sequenceDiagram
+    participant U as 사용자
+    participant C as Controller
+    participant S as Service
+    participant API as OpenAI API
+    participant DB as Database
+    
+    Note over U,DB: AI Chat Flow
+    U->>C: 메시지 전송
+    C->>S: 요청 처리
+    S->>API: GPT-4 호출
+    API->>S: 응답 반환
+    S->>DB: 대화 저장
+    S->>C: 결과 반환
+    C->>U: 응답 표시
+    
+    Note over U,DB: AI Voice Flow
+    U->>C: 음성 파일 업로드
+    C->>S: 음성 처리 요청
+    S->>API: Whisper API 호출
+    API->>S: 텍스트 반환
+    S->>API: GPT-4 분석 호출
+    API->>S: 분석 결과 반환
+    S->>DB: 결과 저장
+    S->>C: 피드백 반환
+    C->>U: 분석 결과 표시
+```
+
+## 🎨 사용자 경험 흐름
+
+```mermaid
+journey
+    title AI 면접 시스템 사용자 경험
+    section AI Chat
+      로그인: 5: 사용자
+      채팅 시작: 4: 사용자
+      메시지 입력: 5: 사용자
+      AI 응답: 5: 사용자
+      대화 계속: 4: 사용자
+    section AI Voice
+      음성 면접 시작: 5: 사용자
+      음성 녹음: 4: 사용자
+      분석 대기: 3: 사용자
+      피드백 확인: 5: 사용자
+      다음 질문: 4: 사용자
+```
+
+이 다이어그램들은 GitHub, GitLab, Notion 등에서 자동으로 렌더링되어 시각적 흐름도를 보여줍니다. Mermaid 문법을 지원하는 플랫폼에서 바로 이미지로 변환됩니다! 
+
